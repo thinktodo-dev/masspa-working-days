@@ -58,7 +58,7 @@ class App extends Component {
                          let addressBranch = branch.address + "," + branch.district + "," + branch.city;
                          return <div className="masspa-working-days-text-address d-flex" key={index}>
                            <span className="masspa-working-days-left-content-02">{t('workingsDay_branch')} {index + 1} :</span>
-                           <span className="masspa-working-days-right-content-02"> {addressBranch}</span>
+                           <a href={`https://www.google.com/maps/search/?api=1&query=${branch.lat},${branch.lng}`} target="_blank" className="masspa-working-days-right-content-02"> {addressBranch}</a>
                          </div>
                        })}
                      </div>
