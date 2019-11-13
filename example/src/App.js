@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import MasspaWorkingDays from 'masspa-working-days'
+import { translate, Trans } from 'react-i18next';
+
 
 let data={
   address: "114 Phan Văn Trị, Phường 2, Quận 5, Hồ Chí Minh, Vietnam",
@@ -83,12 +85,19 @@ let branches=[
 
   render () {
     // props: iconColor informationData branches language borderWorkingDays
+    const{t,i18n} = this.props;
+
+     const changeLanguage = (lng) => {
+      i18n.changeLanguage(lng);
+    }
+
     return (
       <div>
-        <MasspaWorkingDays informationData={data}  branches={branches}  language="vn" />
+        <button onClick={()=>changeLanguage('en')}>en</button>
+        <button  onClick={()=>changeLanguage('vn')}>vn</button>
+        <MasspaWorkingDays informationData={data}  branches={branches}   languages={i18n}/>
       </div>
     )
   }
 }
-
-export default App;
+export default translate('translations')(App);

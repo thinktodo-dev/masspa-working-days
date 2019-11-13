@@ -13,8 +13,26 @@ npm install --save masspa-working-days
 ## Usage
 
 ```jsx
+
+src/index.js
+
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+
+import './index.css'
+import App from './App'
+import { I18nextProvider } from "react-i18next";
+import i18n from "masspa-working-days/src/setting/i18n";
+
+
+ReactDOM.render(<I18nextProvider i18n={i18n}><App /></I18nextProvider>, document.getElementById('root'))
+
+
+src/App.js
+
 import React, { Component } from 'react'
 import MasspaWorkingDays from 'masspa-working-days'
+import { translate, Trans } from 'react-i18next';
 
 
 let data={
@@ -98,26 +116,32 @@ let branches=[
  
 
   render () {
-    // props: iconColor informationData branches language borderWorkingDays
+    const{t,i18n} = this.props;
+
+     const changeLanguage = (lng) => {
+      i18n.changeLanguage(lng);
+    }
+
     return (
       <div>
-        <MasspaWorkingDays informationData={data}  branches={branches}  language="vn" />
+        <button onClick={()=>changeLanguage('en')}>en</button>
+        <button  onClick={()=>changeLanguage('vn')}>vn</button>
+        <MasspaWorkingDays informationData={data}  branches={branches}   languages={i18n}/>
       </div>
     )
   }
 }
-
-export default App;
+export default translate('translations')(App);
 ```
 ## Properties
 
-| Prop                      | Description                             | Value                         | Default       | Required | 
-| ------------------------- |-----------------------------------------|-------------------------------|---------------|----------|
-| **`informationData`**     | data need to show                       |                               | `""`          |          |
-| **`branches`**            | list branches                           |                               | `[]`          |  Array   |
-| **`language`**            | Language                                |  `"en"` or `"vn"`             | `"en"`        |  String  |            
-| **`borderWorkingDays`**   | Border                                  |                               | `"none"`      |  String  |
-| **`iconColor`**           | Color for icon                          |                               | `#ceb060`     |  String  |
+| Prop                      | Description                             | Value                         | Default       | Required    | 
+| ------------------------- |-----------------------------------------|-------------------------------|---------------|-------------|
+| **`informationData`**     | data need to show                       |                               | `""`          |             |
+| **`branches`**            | list branches                           |                               | `[]`          |  Array      |
+| **`languages`**           | Languages                               |                               | `masspai18n`  | ** i18n **  |            
+| **`borderWorkingDays`**   | Border                                  |                               | `"none"`      |  String     |
+| **`iconColor`**           | Color for icon                          |                               | `#ceb060`     |  String     |
 
 ## License
 

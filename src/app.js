@@ -20,13 +20,8 @@ class App extends Component {
   }
   
 
-
   render() {
-    const { t, i18n , informationData , branches ,language, borderWorkingDays, iconColor } = this.props;
-    
-    const changeLanguage = (lng) => {
-      i18n.changeLanguage(lng);
-    }
+    const { t, i18n , informationData , branches, borderWorkingDays, iconColor } = this.props;
   
     if (informationData === null || informationData ==="") {
            return <div></div>
@@ -35,7 +30,6 @@ class App extends Component {
            return(
              <div className="masspa-working-days-container-01">
                <div className="row w-100 no-gutters" style={{border: `${borderWorkingDays}`}}>
-                 {changeLanguage(language)}
                  <div className="col-sm-12 col-md-4 col-lg-4 masspa-working-days-container-02">
                    <div className="masspa-working-days-group">
                      <div className="masspa-working-days-icon-place">
