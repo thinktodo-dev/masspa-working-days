@@ -24,7 +24,55 @@ class App extends Component {
     const { t, i18n , informationData , branches, borderWorkingDays, iconColor } = this.props;
   
     if (informationData === null || informationData ==="") {
-           return <div></div>
+           return (
+            <div className="masspa-working-days-container-01">
+            <div className="row w-100 no-gutters" style={{border: `${borderWorkingDays}`}}>
+              <div className="col-sm-12 col-md-4 col-lg-4 masspa-working-days-container-02">
+                <div className="masspa-working-days-group">
+                  <div className="masspa-working-days-icon-place">
+                    <FiClock className="masspa-working-days-icon" style={{color: `${iconColor}`}}/>
+                  </div>
+                  <div >
+                    <div className="masspa-working-days-text-uppercase">{t('workingsDay_time')}</div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-sm-12 col-md-5 col-lg-5 masspa-working-days-container-02">
+                <div className="masspa-working-days-group">
+                  <div className="masspa-working-days-icon-place">
+                    <FiMapPin className="masspa-working-days-icon" style={{color: `${iconColor}`}}/>
+                  </div>
+                  <div >
+                    <div className="masspa-working-days-text-uppercase">{t('workingsDay_branches')}</div>
+                    {branches.length !== 0 ? 
+                    <div>
+                     {branches.map((branch, index) => {
+                       let addressBranch = branch.address + "," + branch.district + "," + branch.city;
+                       return <div className="masspa-working-days-text-address d-flex" key={index}>
+                         <span className="masspa-working-days-left-content-02">{t('workingsDay_branch')} {index + 1} :</span>
+                         <a href={`https://www.google.com/maps/search/?api=1&query=${branch.lat},${branch.lng}`} target="_blank" className="masspa-working-days-right-content-02"> {addressBranch}</a>
+                       </div>
+                     })}
+                     </div>:<div></div>
+                   
+                   }
+                   
+                  </div>
+                </div>
+              </div>
+              <div className="col-sm-12 col-md-3 col-lg-3 masspa-working-days-container-02">
+                <div className="masspa-working-days-group">
+                  <div className="masspa-working-days-icon-place">
+                    <FiPhone className="masspa-working-days-icon" style={{color: `${iconColor}`}}/>
+                  </div>
+                  <div>
+                    <div className="masspa-working-days-text-uppercase">{t('workingsDay_contact')}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+           )
     }else{
            let workingDaysData = JSON.parse(informationData.workingDays);
            return(
@@ -54,13 +102,19 @@ class App extends Component {
                      </div>
                      <div >
                        <div className="masspa-working-days-text-uppercase">{t('workingsDay_branches')}</div>
-                       {branches.map((branch, index) => {
-                         let addressBranch = branch.address + "," + branch.district + "," + branch.city;
-                         return <div className="masspa-working-days-text-address d-flex" key={index}>
-                           <span className="masspa-working-days-left-content-02">{t('workingsDay_branch')} {index + 1} :</span>
-                           <a href={`https://www.google.com/maps/search/?api=1&query=${branch.lat},${branch.lng}`} target="_blank" className="masspa-working-days-right-content-02"> {addressBranch}</a>
-                         </div>
-                       })}
+                       {branches.length !== 0 ? 
+                       <div>
+                        {branches.map((branch, index) => {
+                          let addressBranch = branch.address + "," + branch.district + "," + branch.city;
+                          return <div className="masspa-working-days-text-address d-flex" key={index}>
+                            <span className="masspa-working-days-left-content-02">{t('workingsDay_branch')} {index + 1} :</span>
+                            <a href={`https://www.google.com/maps/search/?api=1&query=${branch.lat},${branch.lng}`} target="_blank" className="masspa-working-days-right-content-02"> {addressBranch}</a>
+                          </div>
+                        })}
+                        </div>:<div></div>
+                      
+                      }
+                      
                      </div>
                    </div>
                  </div>
@@ -71,7 +125,8 @@ class App extends Component {
                      </div>
                      <div>
                        <div className="masspa-working-days-text-uppercase">{t('workingsDay_contact')}</div>
-                       <a tel="0934788768" className="masspa-working-days-text-address"> Mobile : 0934788768</a>
+                       <a tel={`${informationData.phone}`} className="masspa-working-days-text-address"> Phone : {informationData.phone}</a>
+                       <a tel={`${informationData.mobile}`} className="masspa-working-days-text-address"> Mobile : {informationData.mobile}</a>
                      </div>
                    </div>
                  </div>

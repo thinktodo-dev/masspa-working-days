@@ -490,7 +490,8 @@ p{
     font-family: "Montserrat";
     font-size: 13px;
     font-weight: 500;
-	line-height: 2.3em;
+  line-height: 2.3em;
+  display: block;
 }
 .masspa-working-days-left-content-01{
 	width: 40%;
