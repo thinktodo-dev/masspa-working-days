@@ -22,7 +22,7 @@ class App extends Component {
 
   render() {
     const { t, i18n , informationData , branches, borderWorkingDays, iconColor } = this.props;
-  
+   console.log(i18n)
     if (informationData === null || informationData ==="") {
            return (
             <div className="masspa-working-days-container-01">
